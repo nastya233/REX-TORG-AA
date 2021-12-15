@@ -1,6 +1,5 @@
 CONNECTIONRODATABASE
 
-
 public class ConnectToDataBase {
     public static final EntityManagerFactory emf = Persistence
             .createEntityManagerFactory("conf");
