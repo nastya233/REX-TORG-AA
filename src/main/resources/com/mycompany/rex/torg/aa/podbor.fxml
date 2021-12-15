@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #16022f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.rex.torg.aa.PodborController">
+   <children>
+      <ImageView fitHeight="376.0" fitWidth="570.0" layoutX="18.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fon.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableTovar" layoutX="47.0" layoutY="134.0" prefHeight="211.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="TovarColumn" prefWidth="130.0" text="Номенклатура" />
+          <TableColumn fx:id="PriceColumn" prefWidth="74.0" text="Цена" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="351.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="351.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="371.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToBack" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #61eeca;" text="НАЗАД">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font></Button>
+      <Button layoutX="371.0" layoutY="151.0" mnemonicParsing="false" onAction="#Podobrat" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #61eeca;" text="ПОДОБРАТЬ">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font></Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@rounded-in-photoretrica%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="130.0" fitWidth="125.0" layoutX="470.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgonline-com-ua-Shape-6ydNlm6TSSc.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

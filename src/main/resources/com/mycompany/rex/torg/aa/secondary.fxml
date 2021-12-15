@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #16022f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.rex.torg.aa.SecondaryController">
+   <children>
+      <ImageView fitHeight="360.0" fitWidth="552.0" layoutX="30.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fon.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="214.0" layoutX="37.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@rounded-in-photoretrica%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="478.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgonline-com-ua-Shape-6ydNlm6TSSc.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="90.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="97.0" layoutY="130.0" mnemonicParsing="false" onAction="#switchToRMK" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #61eeca;" text="РЕГИСТРАЦИЯ ПРОДАЖ">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="90.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="90.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="314.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="314.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="190.0" layoutX="314.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Screenshot_11.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="97.0" layoutY="215.0" mnemonicParsing="false" onAction="#OpenSmena" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #61eeca;" text="ОТКРЫТИЕ СМЕНЫ">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+      <Button layoutX="97.0" layoutY="300.0" mnemonicParsing="false" onAction="#CloseSmena" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #61eeca;" text="ЗАКРЫТИЕ СМЕНЫ">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+      <Button layoutX="321.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #61eeca;" text="НАСТРОЙКА РМК">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+      <Button layoutX="321.0" layoutY="215.0" mnemonicParsing="false" onAction="#switchToTovaroved" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #61eeca;" text="ТОВАРОВЕД">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+      <Button layoutX="321.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="50.0" prefWidth="177.0" style="-fx-background-color: #61eeca;" text="ЗАВЕРШЕНИЕ РАБОТЫ">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
