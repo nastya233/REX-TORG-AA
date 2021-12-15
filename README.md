@@ -199,4 +199,15 @@ TABEL
 Нажать на кнопку Issues в правом верхнем углу
 
 Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/dashboard/issues?assignee_username=egorycheva01
+    
+    
+    
+    
+    GIT
+    
+git branch ветка - создание ветки
+git checkout ветка - зайти на ветку
+git branch -d  ветка - удаление ветки
+git branch -m ветка - переименовывать ветку
+
 
