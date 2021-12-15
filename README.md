@@ -114,4 +114,89 @@ TABEL
     ObservableList<Client> clients = FXCollections.observableList(allClients);
     tableClients.setItems(clients);
     }
+    
+    
+    
+    REGISTER
+    
+    
+    
+     private void switchToPrimary() throws IOException {
+        
+        try {
+            Interface crud = new Interface();
+            User user = new User();
+
+            user.setLogin(loginTextField.getText());
+            user.setPassword(passwordTextField.getText());
+            user.setRolesidRoles(Integer.parseInt(roleTextField.getText()));
+
+            user.setSurname(surnameTextField.getText());
+            user.setName(nameTextField.getText());
+            user.setPatronymic(pathronimiсTextField.getText());
+
+            crud.saveUser(user);
+            App.setRoot("primary");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    
+    
+    
+    TESTIROVANIE 
+    
+    
+    Тест № 1 – Проверка входа
+
+Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
+В поле ввода "Логин" ввести: "egorycheva01".
+В поле ввода "Пароль" ввести: "Egorycheva01".
+Нажать на кнопку "Sign in".
+Ожидаемый результат – пользователь на странице url https://gitlab.nntc.nnov.ru/
+
+
+Тест № 2 –  Проверка выхода
+
+Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
+В поле ввода "Логин" ввести: "egorycheva01".
+В поле ввода "Пароль" ввести: "Egorycheva01".
+Нажать на кнопку "Sign in".
+Открыть выпадающий список справа сверху.
+Нажать на "Sign out".
+Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/users/sign_in
+
+
+Тест № 3 – Проверка имени профиля
+
+Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
+В поле ввода "Логин" ввести: "egorycheva01".
+В поле ввода "Пароль" ввести: "Egorycheva01".
+Нажимать на кнопку "Sign in".
+Открыть выпадающий список справа сверху.
+Ожидаемый результат – Имя профиля у выпадающего списка справа сверху «Анастасия Егорычева»
+
+Тест № 4 – Нажатие на кнопку группы
+
+Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
+В поле ввода "Логин" ввести: "egorycheva01".
+В поле ввода "Пароль" ввести: "Egorycheva01".
+Нажать на кнопку "Sign in".
+Нажать на кнопку Groups в левом верхнем углу
+В выпадающем списке нажать на Your Groups
+Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/dashboard/groups
+
+
+ 
+Тест № 5 – Нажатие на кнопку проблемы
+
+Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
+В поле ввода "Логин" ввести: "egorycheva01".
+В поле ввода "Пароль" ввести: "Egorycheva01".
+Нажимать на кнопку "Sign in".
+Нажать на кнопку Issues в правом верхнем углу
+
+Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/dashboard/issues?assignee_username=egorycheva01
 
