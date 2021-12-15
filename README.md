@@ -1,9 +1,10 @@
 CONNECTIONRODATABASE
+
+
 public class ConnectToDataBase {
     public static final EntityManagerFactory emf = Persistence
             .createEntityManagerFactory("conf");
-
-    private static org.hibernate.SessionFactory sessionFactory;
+            private static org.hibernate.SessionFactory sessionFactory;
 
     public ConnectToDataBase() {
 
