@@ -114,3 +114,49 @@ POM.XML
         </plugins>
     </build>
 </project>
+
+
+
+
+
+PERSISTENCE
+
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="conf" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.mycompany.hotel_coursework.db.User</class>
+    <class>com.mycompany.hotel_coursework.db.Client</class>
+    <class>com.mycompany.hotel_coursework.db.Price</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="2811200133"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+
+
+MODULE-INFO
+
+module com.mycompany.hotel_coursework {
+    requires javafx.controls;
+    requires javafx.fxml;
+    
+    requires java.persistence;
+    requires java.sql;
+    requires org.hibernate.orm.core;
+    requires java.naming;
+    requires java.base;
+
+
+    opens com.mycompany.hotel_coursework to javafx.fxml;
+    opens com.mycompany.hotel_coursework.db;
+    exports com.mycompany.hotel_coursework;
+    exports com.mycompany.hotel_coursework.db;
+}
+
