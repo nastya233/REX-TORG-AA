@@ -141,3 +141,113 @@
 
         }
     }
+    
+    
+    
+    
+    
+   РЕГИСТРАЦИЯ ДРОНТАКСИ
+    
+    package com.mycompany.taxi;
+
+import com.mycompany.taxi.db.Roles;
+import com.mycompany.taxi.db.User;
+import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class SecondaryController {
+         
+         
+         public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_taxi_jar_1.0-SNAPSHOTPU");
+       public static EntityManager em = emf.createEntityManager();
+
+    @FXML
+    Text errorMesField;
+    @FXML
+    TextField loginField,emailField,phoneField,fioField;
+    @FXML
+    PasswordField passwordField;
+    @FXML
+    private void createAccount() throws IOException {
+        
+        String login = loginField.getText().toString();
+        String password = passwordField.getText().toString();
+        String email = emailField.getText().toString();
+        String phone = phoneField.getText().toString();
+        String fio = fioField.getText().toString();
+        
+        String errorMes = validation(login, password, email, phone, fio);
+        if (errorMes != null){
+            errorMesField.setText(errorMes);
+        } else {
+            em.getTransaction().begin();
+                em.createNativeQuery("INSERT INTO user ( id_role, login, password, email, fio, phone) "
+                    + " VALUES ( :a, :b, :c, :d, :f, :g)")
+                    .setParameter("a", 1)
+                    .setParameter("b", login)
+                    .setParameter("c", password)
+                    .setParameter("d", email)
+                    .setParameter("f", fio)
+                    .setParameter("g", phone).executeUpdate();
+                em.getTransaction().commit();
+            errorMesField.setText("УСПЕШНАЯ РЕГИСТРАЦИЯ!");
+
+        }
+    }
+    @FXML
+    private void goToLoginPane() throws IOException {
+        App.setRoot("primary");
+    }
+
+    private String validation(String login, String password, String email, String phone, String fio) {
+    if (login.length()<6){
+        String mes ="логин должен быть длинее 6 символов";
+        return mes;     
+    }
+    if (email.contains("@")) {
+
+    } else {
+        String mes ="введите корректный емейл";
+        return mes;
+    }
+    if (fio.length()<2){
+        String mes ="слишком короткое имя";
+        return mes;
+    }
+        if (phone.length() != 15){   
+        String mes ="введите номер по форме " +'\n'+"8-***-***-**-**";
+        
+        return mes;
+    } else {
+        String[] array = phone.split("-");
+        if ((array[0].length() != 1)&&(array[1].length() != 3)&& 
+                (array[2].length() != 3)&& (array[3].length() != 2)&& (array[4].length() != 2)){
+        String mes ="введите номер по форме " +'\n'+"8-***-***-**-**";
+        
+        return mes;
+        }
+        }
+    if (password.length() < 6 ){   
+        String mes ="пароль должен быть длинее 6 символов";
+        
+        return mes;
+    } else {
+        if (password.matches(".*\\d.*")){
+            
+        } else {
+            String mes ="пароль должен содержать хотя бы 1 цифру";
+            return mes;
+        }
+    }
+    return null;
+    }
+
+    
+}
+    
