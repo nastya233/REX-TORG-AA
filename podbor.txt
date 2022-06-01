@@ -1,0 +1,39 @@
+INNER JOIN
+ 
+SELECT *
+FROM table-1
+JOIN table-2 ON table-1.parameter=table-2.parameter
+WHERE table-1.parameter IS ‘myData’
+  
+  
+  
+LEFT JOIN
+
+SELECT *
+FROM table1
+LEFT JOIN table2 ON table1.parameter=table2.parameter
+
+При желании, надстраивая подобный фильтр, можно вовсе исключить целую категорию строк:
+
+SELECT * 
+FROM table1
+LEFT JOIN table2 ON table1.parameter=table2.parameter
+WHERE table2.parameter IS NULL
+
+SELECT *
+FROM Russian
+LEFT JOIN Rap ON Russian.genreId=Rap.genreId
+
+
+
+
+RIGHT JOIN 
+
+SELECT *
+FROM table1
+RIGHT JOIN table2 ON table1.parameter=table2.parameter
+
+
+SELECT *
+FROM Russian
+RIGHT JOIN Rap ON Russian.genreId=Rap.genreId
