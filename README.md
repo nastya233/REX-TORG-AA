@@ -1,214 +1,143 @@
-CONNECTIONRODATABASE
-
-public class ConnectToDataBase {
-    public static final EntityManagerFactory emf = Persistence
-            .createEntityManagerFactory("conf");
-            private static org.hibernate.SessionFactory sessionFactory;
-
-    public ConnectToDataBase() {
-
-    }
-    public static org.hibernate.SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = emf.unwrap(SessionFactory.class);
-            emf.createEntityManager().persist(new User());
-        }
-        return sessionFactory;
-    }
-   
-
-}
+АВТОРИЗАЦИЯ ДРОНТАКСИ
 
 
-INTERFACE
- public int getRole(String login, String password) {
-        User u = new User();
-        u = findUser(login);
-        if (password.equals(u.getPassword())){
-        if (u.getRolesidRoles() == 1){
-         return 1;
-        } else{
-         return 2;
-        }
-        } else return 0;
-       }
-   
-    public User findUser(String login){
-        return (User) ConnectToDataBase.getSessionFactory().openSession().createQuery("FROM User U WHERE U.login = '" + login +"'").uniqueResult();
-    }
-    public void saveUser(User user) {
-            Session session = ConnectToDataBase.getSessionFactory().openSession();
-            Transaction tx1 = session.beginTransaction();
-            session.save(user);
-            tx1.commit();
-            session.close();
-        }
-public List<Client> findClients(){
-        return (List<Client>) ConnectToDataBase.getSessionFactory().openSession().createQuery("FROM Client").list();
-    }
+package com.example.taxi;
 
+import java.sql.*;
 
-
-LOGIN
-
-VAR1
-
-private void Login() throws IOException {
-Interface inter = new Interface();
-if(loginText.getText().equals(inter.findUser(loginText.getText()).getLogin())&& passwordText.getText().equals(inter.findUser(loginText.getText()).getPassword())&& inter.findUser(loginText.getText()).getRolesidRoles()==1){
-App.setRoot("menu_admin");
-}else{
-App.setRoot("Client_manager");
-}
-}
-
-
-VAR2
-
-  @FXML
-   private void Login() throws IOException {
-        Interface inter = new Interface();
-        int role = inter.getRole(loginText.getText(), passwordText.getText());
-        if (role != 0){
-        if (role == 1){
-        App.setRoot("menu_admin");
-        } else {
-        App.setRoot("Client_manager");
-        }
-    }
-}
-
-PEREXOD
-
-  @FXML
-     private void priceSwitch(ActionEvent actionEvent) throws IOException {
-        App.setRoot("price");
-        
-    }
-}
-
-
-TABEL
-
-
-     @FXML public TableView<Client> tableClients;
-     @FXML public TableColumn<Client, String> surnameColumn, nameColumn, patronymicColumn, numberColumn, priceColumn, typeColumn;
-
-     @FXML public Button exitBitton;
-   @FXML
-     private void primarySwitch(ActionEvent actionEvent) throws IOException {
-        App.setRoot("primary");
-        
-    }
-    
-    @FXML
-    public void loadClients(){
-    Interface inter = new Interface();
-
-    List<Client> allClients = inter.findClients();
-
-    surnameColumn.setCellValueFactory((TableColumn.CellDataFeatures<Client, String> cd) -> {
-    return new SimpleStringProperty(String.valueOf(cd.getValue().getSurname()));
-        });
-
-    ObservableList<Client> clients = FXCollections.observableList(allClients);
-    tableClients.setItems(clients);
-    }
-    
-    
-    
-    REGISTER
-    
-    
-    
-     private void switchToPrimary() throws IOException {
-        
+public class Database {
+    private Connection connection;
+    private String ipDBServer = "localhost:3306";
+    private String login = "user";
+    private String password = "user";
+    private String nameDB = "dronetaxi";
+    Database() {
+        String url = "jdbc:mysql://" + ipDBServer + "/" + nameDB + "?serverTimezone=Europe/Moscow";
         try {
-            Interface crud = new Interface();
-            User user = new User();
-
-            user.setLogin(loginTextField.getText());
-            user.setPassword(passwordTextField.getText());
-            user.setRolesidRoles(Integer.parseInt(roleTextField.getText()));
-
-            user.setSurname(surnameTextField.getText());
-            user.setName(nameTextField.getText());
-            user.setPatronymic(pathronimiсTextField.getText());
-
-            crud.saveUser(user);
-            App.setRoot("primary");
-        } catch (Exception e) {
+            connection = DriverManager.getConnection(url, login, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public ResultSet login(String login, String password) {
+        String select = "select U.*, R.name from user U, role R where login = " +
+                "\"" + login + "\" and password = \"" + password + "\" and U.idrole = R.idrole";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(select);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        ResultSet rs = null;
+        try {
+            rs = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (rs.next()) {
+                return rs;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+
+
+
+package com.example.taxi;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.util.FXPermission;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class HelloController {
+    @FXML
+    private Label welcomeText;
+    @FXML
+    private TextField loginField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private CheckBox rememberCheckBox;
+    @FXML
+    private Text loginText;
+    @FXML
+    private Text passwordText;
+
+ 
+ @FXML
+    protected void onHelloButtonClick() {
+        welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+public void toGO(ActionEvent actionEvent) throws IOException{
+        if (loginField.getText().isBlank()) {
+            loginText.setText("Логин: Заполните поле!");
+            loginText.setFill(Color.web("#f29696"));
+            passwordText.setText("Пароль");
+            passwordText.setFill(Color.web("#eae7e7"));
+        } else if (passwordField.getText().isBlank()) {
+            loginText.setText("Логин");
+            loginText.setFill(Color.web("#eae7e7"));
+            passwordText.setText("Пароль: Заполните поле!");
+            passwordText.setFill(Color.web("#f29696"));
+        } else {
+            Database database = new Database();
+            ResultSet rs = database.login(loginField.getText(), passwordField.getText());
+            if (rs != null) {
+                loginText.setText("Логин");
+                passwordText.setText("Пароль");
+                loginText.setFill(Color.web("#eae7e7"));
+                passwordText.setFill(Color.web("#eae7e7"));
+                try {
+                    User user = new User(rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(9),
+                            rs.getString(10),
+                            rs.getString(11),
+                            rs.getInt(4),
+                            rs.getString(12));
+                    HelloApplication.user = user;
+                    HelloApplication.setRoot("prof");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                loginText.setText("Логин: Неверный логин или пароль!");
+                passwordText.setText("Пароль: Неверный логин или пароль!");
+                loginText.setFill(Color.web("#f29696"));
+                passwordText.setFill(Color.web("#f29696"));
+            }
+        }
 
     }
 
-    
-    
-    
-    TESTIROVANIE 
-    
-    
-    Тест № 1 – Проверка входа
+   public void toReg(ActionEvent actionEvent) throws IOException{
+        HelloApplication.setRoot("reg");
 
-Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
-В поле ввода "Логин" ввести: "egorycheva01".
-В поле ввода "Пароль" ввести: "Egorycheva01".
-Нажать на кнопку "Sign in".
-Ожидаемый результат – пользователь на странице url https://gitlab.nntc.nnov.ru/
-
-
-Тест № 2 –  Проверка выхода
-
-Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
-В поле ввода "Логин" ввести: "egorycheva01".
-В поле ввода "Пароль" ввести: "Egorycheva01".
-Нажать на кнопку "Sign in".
-Открыть выпадающий список справа сверху.
-Нажать на "Sign out".
-Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/users/sign_in
-
-
-Тест № 3 – Проверка имени профиля
-
-Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
-В поле ввода "Логин" ввести: "egorycheva01".
-В поле ввода "Пароль" ввести: "Egorycheva01".
-Нажимать на кнопку "Sign in".
-Открыть выпадающий список справа сверху.
-Ожидаемый результат – Имя профиля у выпадающего списка справа сверху «Анастасия Егорычева»
-
-Тест № 4 – Нажатие на кнопку группы
-
-Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
-В поле ввода "Логин" ввести: "egorycheva01".
-В поле ввода "Пароль" ввести: "Egorycheva01".
-Нажать на кнопку "Sign in".
-Нажать на кнопку Groups в левом верхнем углу
-В выпадающем списке нажать на Your Groups
-Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/dashboard/groups
-
-
- 
-Тест № 5 – Нажатие на кнопку проблемы
-
-Открыть сайт: https://gitlab.nntc.nnov.ru/users/sign_in.
-В поле ввода "Логин" ввести: "egorycheva01".
-В поле ввода "Пароль" ввести: "Egorycheva01".
-Нажимать на кнопку "Sign in".
-Нажать на кнопку Issues в правом верхнем углу
-
-Ожидаемый результат - пользователь на странице url https://gitlab.nntc.nnov.ru/dashboard/issues?assignee_username=egorycheva01
-    
-    
-    
-    
-    GIT
-    
-git branch ветка - создание ветки
-git checkout ветка - зайти на ветку
-git branch -d  ветка - удаление ветки
-git branch -m ветка - переименовывать ветку
-
-    
-    
+    }
+}
