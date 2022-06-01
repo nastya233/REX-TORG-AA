@@ -150,18 +150,18 @@
     
     package com.mycompany.taxi;
 
-import com.mycompany.taxi.db.Roles;
-import com.mycompany.taxi.db.User;
-import java.io.IOException;
-import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+    import com.mycompany.taxi.db.Roles;
+    import com.mycompany.taxi.db.User;
+    import java.io.IOException;
+    import javafx.fxml.FXML;
+    import javafx.scene.control.PasswordField;
+    import javafx.scene.control.TextField;
+    import javafx.scene.text.Text;
+    import javax.persistence.EntityManager;
+    import javax.persistence.EntityManagerFactory;
+    import javax.persistence.Persistence;
 
-public class SecondaryController {
+    public class SecondaryController {
          
          
          public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_taxi_jar_1.0-SNAPSHOTPU");
